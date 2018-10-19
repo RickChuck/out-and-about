@@ -1,53 +1,55 @@
 import React, { Component } from 'react';
-import {
-    Map,
-    // google,
-    InfoWindow,
-    Marker,
-    GoogleApiWrapper,
-} from 'google-maps-react';
+import axios from 'axios';
 require('dotenv').config();
 
+const{REACT_APP_API_KEY}=process.env
+
+const cardStyle = {
+    margin: '40px',
+    border: '5px solid black'
+    
+}
 
 class Trails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            places: []
+            results: [],
+            isLoading: true,
+            errors: null
         }
     }
-    componentDidMount() {
-        // let map = new mapboxgl.Map({
-        //     center: [-111.248932, 40.344304]
-        // })
-        // let service = new google.maps.places.PlacesService(map);
 
-        // service.getDetails({
-        //     placeId: 'ChIJAUKRDWz2wokRxngAavG2TD8'
-        // }, (place, status) => {
-        //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-        //         console.log(place.reviews);
-        //     }
-        // })
-    }
+  componentDidMount() {
+      navigator.geolocation.getCurrentPosition(data=> {
+        console.log(data)
+        axios.get(`https://trailapi-trailapi.p.mashape.com/trails/explore/?lat=${data.coords.latitude}&lon=${data.coords.longitude}`, {headers: {"X-Mashape-Key": REACT_APP_API_KEY}})
+        .then(res => {
+            this.setState({results: res.data})
+        })
+        .then(newData => this.setState({users: newData, store: newData}))
+        .catch(error => alert(error))
+      })
+  }
+
   render() {
-      const {places} = this.state;
+    console.log(this.state)
     return (
       <div className="Trails">
-        <p>{
-            places.map((place) => {
-                return <p>{place.author_name}{place.rating}{place.text}</p>
-            })
-        }</p>
-        <Map google={this.props.google} zoom ={13} defaultCenter = {{lat: 40.2338, lng: 111.6585}}>
-         
-          <Marker onClick={this.onMarkerClick}
-            name={'Current location'} />
-
-            <InfoWindow onClose={this.onInfoWindowClose}>
-              
-            </InfoWindow> 
-        </Map>
+        <div className="display">
+        {this.state.results.data&&this.state.results.data.map(el => {
+            return(
+                <div className='card' style={cardStyle}>
+                    <h2>{el.name}</h2>
+                    <p>{el.description}</p>
+                    <div>
+                        <img alt='thumbnail'>{el.thumbnail}</img>
+                    </div>
+                </div>
+                
+                )
+            })}
+        </div>
         
       </div>
     );
@@ -56,8 +58,7 @@ class Trails extends Component {
 
 
 
-console.log(process.env.REACT_APP_API_KEY)
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_API_KEY
-})(Trails);
+export default Trails
+
+
 
