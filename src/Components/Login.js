@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
-import mountains from '../photos/mountains.png';
+
+const appStyle = {
+    margin: '0%',
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#41476B'
+}
+const buttonStyle = {
+   
+}
 
 export default class Login extends Component {
 
@@ -13,10 +22,10 @@ export default class Login extends Component {
 
     render() {
         return(
-            <div className='App'>
-
-                <img src={mountains} alt='mountains'></img>
-                <button onClick={this.login}>Login</button>
+            <div className='App' style={appStyle}>
+                <h1 className='button'>
+                    <button onClick={this.login} style={buttonStyle}>Login</button>
+                </h1>
             </div>
         )
     }

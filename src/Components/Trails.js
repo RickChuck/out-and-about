@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import mountains from '../photos/mountains.png';
 import axios from 'axios';
 require('dotenv').config();
 
 const{REACT_APP_API_KEY}=process.env
 
+const trailStyle = {
+    backgroundColor:'#FFE3D8'
+}
+
 const cardStyle = {
     margin: '40px',
-    border: '5px solid black'
+    border: '5px solid black',
+
     
+}
+const headerStyle = {
+    display: 'flex',
+    width: '100%'
 }
 
 class Trails extends Component {
@@ -35,7 +45,8 @@ class Trails extends Component {
   render() {
     console.log(this.state)
     return (
-      <div className="Trails">
+      <div className="Trails" style={trailStyle}>
+         <img src={mountains} style={headerStyle} alt='mountains'></img>
         <div className="display">
         {this.state.results.data&&this.state.results.data.map(el => {
             return(
@@ -43,7 +54,7 @@ class Trails extends Component {
                     <h2>{el.name}</h2>
                     <p>{el.description}</p>
                     <div>
-                        <img alt='thumbnail'>{el.thumbnail}</img>
+                        {/* <img alt='thumbnail'>{el.thumbnail}</img> */}
                     </div>
                 </div>
                 
