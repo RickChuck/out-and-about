@@ -1,0 +1,76 @@
+.mountain {
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    background-attachment: fixed;
+    position: fixed;
+    top: 0px;
+    display: flex;
+    }
+
+nav {
+    width: 20vw;
+    order: -1;
+    float: left;
+}
+
+#nav-wrapper a{
+    position: fixed;
+    left: -90px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 80px;
+    height: 90px;
+    text-decoration: none;
+    font-size: 20px;
+    color: whitesmoke;
+    border-radius: 0 5px 5px 0;
+    text-align: center;
+    font-size: 15px;
+    // display: flex;
+    // flex-direction: column;
+    // height: 100%;
+    // width: 200px;
+    // position: fixed;
+    // z-index: 1;
+    // top: 0;
+    // background-color: whitesmoke;
+    // border: solid black 10px;
+    // overflow-x: hidden;
+    // padding-top: 10px;
+
+}
+#display {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+#nav-wrapper a:hover {
+    left: 0;
+}
+
+#home {
+    top: 20px;
+    background-color: #4fbf7c;
+}
+
+#user {
+    top: 150px;
+    background-color: #4fbf7c;
+    
+}
+#card {
+    background-color: whitesmoke;
+    margin: 40px;
+    border: 5px solid black;
+}
+#Trails {
+    // background-color: whitesmoke;
+}
+#thumbnail {
+    width: 200px;
+    height: auto;
+}
+// .card {}
