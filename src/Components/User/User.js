@@ -46,6 +46,7 @@ class User extends Component {
                     <ul><a href="!#/user" id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</a></ul>
                 </ul>
             </nav>
+            
             <div id="display">
             {this.state.results.data&&this.state.results.data.map(el => {
                 return(

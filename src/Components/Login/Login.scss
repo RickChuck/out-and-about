@@ -30,9 +30,23 @@ $font-stack: 'Amatic SC', cursive;
     }
     font-family: $font-stack;
     border: solid 5px black;
+    
   }  
+  .mtnBackground{
+    @include centerer;
+    width: 2000px;
+    height: auto;
+    position: fixed;
+    
+    // background-image: url(../../photos/mtnBackground.png);
+    // background-repeat: no-repeat; 
+    // background-position-x: center;
+    // background-attachment: fixed;
+    // background-size: 2000px auto;
+    
+  }
   
-  button {
+  #login {
     @include centerer;
     position: fixed;
     border: black 5px solid;
@@ -40,12 +54,4 @@ $font-stack: 'Amatic SC', cursive;
     padding: 20px;
     margin: 10px;
     
-  }
-  body{
-    background-color: whitesmoke;
-    background-image: url(../../photos/mtnBackground.png);
-    background-repeat: no-repeat; 
-    background-position-x: center;
-    background-attachment: fixed;
-    background-size: 1800px auto;
   }

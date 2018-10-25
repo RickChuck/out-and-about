@@ -19,45 +19,61 @@ class Trails extends Component {
             errors: null
         }
     }
+    // logOut() {
+    //     let {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
+
+    //     let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
+        
+    //     window.location = `https://${REACT_APP_DOMAIN}/v2/logout?returnTo=`
+    // }
 
   componentDidMount() {
       navigator.geolocation.getCurrentPosition(data=> {
         console.log(data)
         axios.get(`https://trailapi-trailapi.p.mashape.com/trails/explore/?lat=${data.coords.latitude}&lon=${data.coords.longitude}`, {headers: {"X-Mashape-Key": REACT_APP_API_KEY}})
         .then(res => {
+            console.log(res.data)
             this.setState({results: res.data})
         })
         .then(newData => this.setState({users: newData, store: newData}))
         .catch(error => alert(error))
       })
   }
+  deleteFavorite() {
+      
+  }
 
   render() {
-    console.log(this.state)
-    return (
-      <div id="Trails">
-        <div class="photo-banner">
-         <img src={mountains} class='mountain' alt='mountains'></img>
-         </div>
-        <nav>
-            <ul id="nav-wrapper">
-                <ul><a href="!#/trails" id="home"><img style={{width:75, height:75}} src={home2} alt='home'></img>Home</a></ul>
-                <ul><a href="!#/user" id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</a></ul>
-            </ul>
-        </nav>
-        <div id="display">
-        {this.state.results.data&&this.state.results.data.map(el => {
-            return(
-                <div id='card'>
-                    <h2>{el.name}</h2>
-                    <h3>City: {el.city}</h3>
-                    <h4>Directions: {el.directions}</h4>
-                    <p>{el.description}</p>
-                    <img id='thumbnail' src={el.thumbnail} alt='thumbnail'/>
-                    <div>
-                    </div>
+      console.log(this.state)
+      return (
+          <div id="Trails">
+            <div>
+            <div class='mtnBackground' alt='mtnBackground'/>
+            </div>
+            <div id="titleBanner">
+            <h1>Out & About</h1>
+            </div>
+                <div>
+                    <a href='http://localhost:3000/'>
+                        <button id='logout'>Logout</button>
+                    </a>
                 </div>
-                
+            <nav>
+                <ul id="nav-wrapper">
+                    <ul><a href="!#/trails" id="home"><img style={{width:75, height:75}} src={home2} alt='home'></img>Home</a></ul>
+                    <ul><a href="!#/user" id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</a></ul>
+                </ul>
+            </nav>
+            <div id="display">
+            {this.state.results.data&&this.state.results.data.map(el => {
+                return(
+                    <div id='card'>
+                        <h2 id='trailName'>{el.name}</h2>
+                        <h3>City: {el.city}</h3>
+                        <h4>Directions: {el.directions}</h4>
+                        <p>{el.description}</p>
+                        <img id='thumbnail' src={el.thumbnail} alt='thumbnail'/>
+                    </div>
                 )
             })}
         </div>

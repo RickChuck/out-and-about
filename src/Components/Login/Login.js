@@ -1,18 +1,6 @@
 import React, {Component} from 'react';
-import './Login.scss'
-
-// const appStyle = {
-//     margin: '0%',
-//     width: '100%',
-//     height: '100%',
-//     backgroundColor: '#41476B'
-// }
-// const buttonStyle = {
-    
-// }
-// const titleStyle = {
-    
-// }
+import mtnBackground from '../../photos/mtnBackground.png'
+import './Login.scss';
 
 export default class Login extends Component {
 
@@ -26,12 +14,13 @@ export default class Login extends Component {
 
     render() {
         return(
-            <div className='App' >
+            <div id='App' >
             <body>
+                <img src={mtnBackground} class='mtnBackground' alt='mtnBackground'/>
                 <div id='body'>
                     <h1 id='outAbout'>Out & About</h1>
                     <ul className='button'>
-                        <button onClick={this.login}>Login</button>
+                        <button id='login' onClick={this.login}>Login</button>
                     </ul>
                 </div>
             </body>
