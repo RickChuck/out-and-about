@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import mountains from '../../photos/mountains.png';
+// import mountains from '../../photos/mountains.png';
 import home2 from '../../photos/home2.png';
 import star2 from '../../photos/star2.png';
 import axios from 'axios';
+import CommentBox from './CommentBox';
 import './Trails.scss';
+import { id } from 'postcss-selector-parser';
 require('dotenv').config();
 
 const{REACT_APP_API_KEY}=process.env
-
-
 
 class Trails extends Component {
     constructor(props) {
@@ -19,13 +19,6 @@ class Trails extends Component {
             errors: null
         }
     }
-    // logOut() {
-    //     let {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
-
-    //     let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
-        
-    //     window.location = `https://${REACT_APP_DOMAIN}/v2/logout?returnTo=`
-    // }
 
   componentDidMount() {
       navigator.geolocation.getCurrentPosition(data=> {
@@ -38,9 +31,6 @@ class Trails extends Component {
         .then(newData => this.setState({users: newData, store: newData}))
         .catch(error => alert(error))
       })
-  }
-  deleteFavorite() {
-      
   }
 
   render() {
@@ -55,7 +45,7 @@ class Trails extends Component {
             </div>
                 <div>
                     <a href='http://localhost:3000/'>
-                        <button id='logout'>Logout</button>
+                        <button class='logout'>Logout</button>
                     </a>
                 </div>
             <nav>
@@ -73,6 +63,9 @@ class Trails extends Component {
                         <h4>Directions: {el.directions}</h4>
                         <p>{el.description}</p>
                         <img id='thumbnail' src={el.thumbnail} alt='thumbnail'/>
+                        <div className='commentBox'>
+                         <CommentBox />
+                        </div> 
                     </div>
                 )
             })}
@@ -86,6 +79,3 @@ class Trails extends Component {
 
 
 export default Trails
-
-
-
