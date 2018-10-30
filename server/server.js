@@ -6,6 +6,7 @@ const axios = require('axios');
 const massive = require('massive');
 
 const app = express();
+app.use(bodyParser.json())
 
 const {
     SERVER_PORT,
@@ -49,15 +50,15 @@ app.get('/auth/callback', async (req, res) => {
 
       let {location, picture, sub, name} = userRes.data
 
-      //   const db = app.get('db');
-    //   let foundCustomer = await db.find_customer([sub]);
-    //   console.log('test')
-    //   if(foundCustomer[0]){
-    //     req.session.user = foundCustomer[0];
-    //   } else {
-    //     let createdCust = await db.create_customer([name, sub, picture, location]);
-    //     req.session.user = createdCust[0];
-    //   }
+        const db = app.get('db');
+      let foundUser = await db.find_user([sub]);
+      console.log('test')
+      if(foundUser[0]){
+        req.session.user = foundUser[0];
+      } else {
+        let createdUser = await db.create_user([name, sub]);
+        req.session.user = createdUser[0];
+      }
       res.redirect('/#/trails')
 })
 
@@ -73,5 +74,30 @@ app.get('/auth/logout', (req, res) => {
     req.session.destroy();
     res.redirect('http://localhost:3000/#/')
 })
+
+app.get('/api/commentList/:trailid', (req, res) => {
+    const{trailid} = req.params
+    const db = req.app.get('db')
+    db.get_trail_comments([trailid])
+    .then((comments) => res.status(200).send(comments))
+})
+
+app.post('/api/addComment',(req, res) => {
+    console.log(req.body)
+    const{comment, trailID} = req.body
+    const db = req.app.get('db')
+    const user = req.session.user.user_id
+    db.add_comment([trailID, comment, user])
+    .then((comments) => {
+        res.status(200).send(comments)
+    })
+})
+
+// app.delete('/api/deleteComment'),(req, res) => {
+//     db.add_comment([trailID, comment])
+//     .then((comments) => {
+//         res.status(200).send(comments)
+//     })
+// }
 
 app.listen(SERVER_PORT, () => console.log(`I hear it on: ${SERVER_PORT}`))

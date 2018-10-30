@@ -10,6 +10,7 @@ $font-stack: 'Amatic SC', cursive;
     position: fixed;
     border: solid black 3px;
     height: 30%;
+    z-index: 1;
 }
 
 nav {
@@ -31,6 +32,9 @@ nav {
     border-radius: 0 5px 5px 0;
     text-align: center;
     font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-weight: 900;
 }
 
 #display {
@@ -61,7 +65,7 @@ nav {
 
 #card {
     position: sticky;
-    z-index: -1;
+    // z-index: -1;
     background-color: whitesmoke;
     opacity: 0.9;
     margin: 10px;
@@ -80,7 +84,7 @@ nav {
     margin: 5px;
     border: black solid 3px;
 }
-button.logout{
+button.logout {
     position: fixed;
     top: 2%;
     left:93%;
@@ -89,9 +93,15 @@ button.logout{
     color: #4fbf7c;
     border: solid 2px black;
     font-size: 16px;
+    font-weight: 700;
     border-radius: 8px;
     cursor: pointer;
     
+}
+
+.comments {
+    border: solid 10px black;
+    margin: 1px;
 }
 
 

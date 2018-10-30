@@ -1,5 +1,5 @@
 CREATE TABLE users(
     user_id SERIAL PRIMARY KEY,
     user_name TEXT,
-    user_favorites ARRAY
-)
+    auth_id TEXT
+);

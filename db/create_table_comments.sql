@@ -3,4 +3,4 @@ CREATE TABLE comments(
     trail_id TEXT,
     comment TEXT,
     user_id INT
-)
+);

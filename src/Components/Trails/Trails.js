@@ -5,7 +5,6 @@ import star2 from '../../photos/star2.png';
 import axios from 'axios';
 import CommentBox from './CommentBox';
 import './Trails.scss';
-import { id } from 'postcss-selector-parser';
 require('dotenv').config();
 
 const{REACT_APP_API_KEY}=process.env
@@ -25,7 +24,7 @@ class Trails extends Component {
         console.log(data)
         axios.get(`https://trailapi-trailapi.p.mashape.com/trails/explore/?lat=${data.coords.latitude}&lon=${data.coords.longitude}`, {headers: {"X-Mashape-Key": REACT_APP_API_KEY}})
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({results: res.data})
         })
         .then(newData => this.setState({users: newData, store: newData}))
@@ -34,18 +33,17 @@ class Trails extends Component {
   }
 
   render() {
-      console.log(this.state)
+    //   console.log(this.state)
       return (
           <div id="Trails">
             <div>
-            <div class='mtnBackground' alt='mtnBackground'/>
+                <div className='mtnBackground' alt='mtnBackground'/>
             </div>
-            <div id="titleBanner">
+                <div id="titleBanner">
             <h1>Out & About</h1>
-            </div>
                 <div>
                     <a href='http://localhost:3000/'>
-                        <button class='logout'>Logout</button>
+                        <button className='logout'>Logout</button>
                     </a>
                 </div>
             <nav>
@@ -54,17 +52,18 @@ class Trails extends Component {
                     <ul><a href="!#/user" id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</a></ul>
                 </ul>
             </nav>
+            </div>
             <div id="display">
-            {this.state.results.data&&this.state.results.data.map(el => {
+            {this.state.results.data&&this.state.results.data.map((el, i) => {
                 return(
-                    <div id='card'>
+                    <div id='card' key={i}>
                         <h2 id='trailName'>{el.name}</h2>
                         <h3>City: {el.city}</h3>
                         <h4>Directions: {el.directions}</h4>
                         <p>{el.description}</p>
                         <img id='thumbnail' src={el.thumbnail} alt='thumbnail'/>
                         <div className='commentBox'>
-                         <CommentBox />
+                         <CommentBox trailID={el.id}/>
                         </div> 
                     </div>
                 )
