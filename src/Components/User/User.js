@@ -37,8 +37,9 @@ class User extends Component {
              {/* <img src={mountains} class='mountain' alt='mountains'></img> */}
              </div>
              <div id="titleBanner">
-            <h1>Out & About</h1>
             <h3 id='sub-title'>Favorite Trails</h3>
+            <h1>Out & About</h1>
+            
             <nav>
                 <ul id="nav-wrapper">
                     <ul><a href="!#/trails" id="home"><img style={{width:75, height:75}} src={home2} alt='home'></img>Home</a></ul>
@@ -54,9 +55,9 @@ class User extends Component {
                         <h2 id='name'>{el.name}</h2>
                         <h3 id='city'>City: {el.city}</h3>
                         <h4 id='directions'>Directions: {el.directions}</h4>
-                        <p id='description'>{el.description}</p>
+                        <p id='details'>Details: {el.description}</p>
                         <img id='thumbnail' src={el.thumbnail} alt='thumbnail'/>
-                        <CommentBox trailID={el.id}/>
+                        <CommentBox trailID={el.id} id='comments'/>
                         <div>
                         </div>
                     </div>

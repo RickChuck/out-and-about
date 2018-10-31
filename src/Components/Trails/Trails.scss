@@ -9,7 +9,7 @@ $font-stack: 'Amatic SC', cursive;
     overflow: hidden;
     position: fixed;
     border: solid black 3px;
-    height: 30%;
+    height: 28%;
     z-index: 1;
 }
 
@@ -17,6 +17,7 @@ nav {
     width: 20vw;
     order: -1;
     float: left;
+    
 }
 
 #nav-wrapper a{
@@ -71,7 +72,6 @@ nav {
     margin: 10px;
     border: 5px solid black;
     text-align: start;
-    
 }
 #trailName {
     border-bottom: #4fbf7c solid 2px;
@@ -96,7 +96,10 @@ button.logout {
     font-weight: 700;
     border-radius: 8px;
     cursor: pointer;
-    
+    transition: background-color 0.4s;
+    &:hover {
+        background-color: black; 
+    }
 }
 
 .comments {
@@ -112,5 +115,9 @@ body{
     background-image: url(../../photos/mtnBackground.png);
     background-position-x: center;
     background-attachment: fixed;
-    background-size: 2000px auto;
+    background-size: 1700px auto;
+}
+
+#name, #city, #directions, #details, #comments {
+    margin: 10px;
 }

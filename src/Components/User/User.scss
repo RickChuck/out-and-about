@@ -1,21 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald);
 $font-stack: 'Oswald', sans-serif;
+@mixin centerer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+  }
 
 #card {
     background-color: whitesmoke;
-    margin: 10px;
+    margin: 30px;
     border: 5px solid black;
     font-family: $font-stack;
     
 }
 
 #sub-title {
-    position: absolute;
-    top: 30%;
-    right: 41%;
-    // text-align: center;
+    @include centerer;
 }
-
+#name, #city, #directions, #details, #comments {
+    margin: 10px;
+}
 #name {
     
 }
@@ -25,6 +30,6 @@ $font-stack: 'Oswald', sans-serif;
 #directions {
 
 }
-#description {
+#details {
 
 }

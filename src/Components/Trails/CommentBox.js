@@ -33,12 +33,19 @@ addComment(e) {
    })
 }
 
-deleteComment(commentDelete) {
-    const self = this
-    axios.delete(this.apiComments + '/' + this.commentDelete.id).then((res) => {
-        console.log(res)
-        self.setState({commentDelete:commentDelete})
+deleteComment = (id) => {
+    axios.delete(`/api/removeComment${id}`)
+    .then(response => {
+        const commentIndex = this.state.comments.findIndex(x => x.id === id)
+        const comments = id(this.state.comments, {$splice: [[commentIndex, 1]]})
+        this.setState({comments: comments})
     })
+    .catch(error => console.log(error))
+//     let deleteComment= this.state.comments
+//    axios.delete(`/api/removeComment`, {deleteComment})
+//    .then(res => {
+//        this.res.splice({comments: res.data})
+//    })
 }
 
 handleCommentInput(e) {

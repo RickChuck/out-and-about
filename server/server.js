@@ -93,11 +93,11 @@ app.post('/api/addComment',(req, res) => {
     })
 })
 
-// app.delete('/api/deleteComment'),(req, res) => {
-//     db.add_comment([trailID, comment])
-//     .then((comments) => {
-//         res.status(200).send(comments)
-//     })
-// }
+app.delete('/api/removeComment'),(req, res) => {
+    db.add_comment([trailID, comment])
+    .then((comments) => {
+        res.status(200).send(comments)
+    })
+}
 
 app.listen(SERVER_PORT, () => console.log(`I hear it on: ${SERVER_PORT}`))

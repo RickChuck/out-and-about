@@ -57,12 +57,12 @@ class Trails extends Component {
             {this.state.results.data&&this.state.results.data.map((el, i) => {
                 return(
                     <div id='card' key={i}>
-                        <h2 id='trailName'>{el.name}</h2>
-                        <h3>City: {el.city}</h3>
-                        <h4>Directions: {el.directions}</h4>
-                        <p>{el.description}</p>
+                        <h2 id='name'>{el.name}</h2>
+                        <h3 id='city'>City: {el.city}</h3>
+                        <h4 id='directions'>Directions: {el.directions}</h4>
+                        <p id='details'>Details: {el.description}</p>
                         <img id='thumbnail' src={el.thumbnail} alt='thumbnail'/>
-                        <div className='commentBox'>
+                        <div id='comments'>
                          <CommentBox trailID={el.id}/>
                         </div> 
                     </div>

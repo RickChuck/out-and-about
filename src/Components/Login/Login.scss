@@ -53,5 +53,11 @@ $font-stack: 'Amatic SC', cursive;
     background: whitesmoke;
     padding: 20px;
     margin: 10px;
-    
+    font-size: 14px;
+    font-weight: 800;
+    transition: background-color .4s;
+    &:hover{
+      background-color: #4fbf7c;
+      color: whitesmoke;
+    }
   }
