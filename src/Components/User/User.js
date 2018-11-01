@@ -33,7 +33,7 @@ class User extends Component {
     render() {
         return (
           <div className="User" >
-            <div class="photo-banner">
+            <div className="photo-banner">
              {/* <img src={mountains} class='mountain' alt='mountains'></img> */}
              </div>
              <div id="titleBanner">

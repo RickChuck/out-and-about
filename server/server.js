@@ -12,18 +12,23 @@ const {
     SERVER_PORT,
     REACT_APP_DOMAIN,
     REACT_APP_CLIENT_ID,
+    REACT_APP_LOGIN,
     CLIENT_SECRET,
     CONNECTION_STRING,
     SECRET
 } = process.env;
 
-massive(CONNECTION_STRING).then(db => app.set('db',db) )
+massive(CONNECTION_STRING).then(db => {
+    console.log('db connected')
+    app.set('db',db) 
+})
 
 app.use(session({
     secret: SECRET,
     resave: false,
     saveUninitialized: false
 }))
+
 
 let authBypass = async (req, res, next) => {
     if(process.env.NODE_ENV) {
@@ -63,6 +68,7 @@ app.get('/auth/callback', async (req, res) => {
 })
 
 app.get('/api/user-data', authBypass, (req, res) => {
+    console.log(req.session.user)
     if(req.session.user) {
         res.status(200).send(req.session.user);
     } else {
@@ -72,9 +78,8 @@ app.get('/api/user-data', authBypass, (req, res) => {
 
 app.get('/auth/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('http://localhost:3000/#/')
+    res.redirect(process.env.REACT_APP_LOGIN)
 })
-
 app.get('/api/commentList/:trailid', (req, res) => {
     const{trailid} = req.params
     const db = req.app.get('db')
@@ -86,6 +91,7 @@ app.post('/api/addComment',(req, res) => {
     console.log(req.body)
     const{comment, trailID} = req.body
     const db = req.app.get('db')
+    console.log(req.session)
     const user = req.session.user.user_id
     db.add_comment([trailID, comment, user])
     .then((comments) => {
@@ -93,11 +99,11 @@ app.post('/api/addComment',(req, res) => {
     })
 })
 
-app.delete('/api/removeComment'),(req, res) => {
-    db.add_comment([trailID, comment])
-    .then((comments) => {
-        res.status(200).send(comments)
-    })
-}
+app.delete('/api/removeComment/:id/:trail_id',(req, res) => {
+    const db = req.app.get('db')
+    db.delete_comment([+req.params.id, req.params.trail_id])
+    .then((updatedComments) =>
+    res.status(200).send(updatedComments))
+})
 
 app.listen(SERVER_PORT, () => console.log(`I hear it on: ${SERVER_PORT}`))

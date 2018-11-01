@@ -4,6 +4,7 @@ import './Login.scss';
 
 export default class Login extends Component {
 
+
     login() {
         let {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
 

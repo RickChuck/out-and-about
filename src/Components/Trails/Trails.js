@@ -7,7 +7,10 @@ import CommentBox from './CommentBox';
 import './Trails.scss';
 require('dotenv').config();
 
-const{REACT_APP_API_KEY}=process.env
+const{
+    REACT_APP_API_KEY,
+    REACT_APP_LOGIN
+}=process.env
 
 class Trails extends Component {
     constructor(props) {
@@ -15,7 +18,8 @@ class Trails extends Component {
         this.state = {
             results: [],
             isLoading: true,
-            errors: null
+            errors: null,
+            userId: {}
         }
     }
 
@@ -29,7 +33,15 @@ class Trails extends Component {
         })
         .then(newData => this.setState({users: newData, store: newData}))
         .catch(error => alert(error))
-      })
+      });
+
+      axios.get(`/api/user-data`)
+      .then( (res) => {
+        this.setState({userId: res.data})
+        console.log(res.data)
+        // axios.get(`/api/commentList/${this.props.trailID}`)
+        // .then(comments => this.setState({comments: comments.data}));
+    })
   }
 
   render() {
@@ -42,7 +54,7 @@ class Trails extends Component {
                 <div id="titleBanner">
             <h1>Out & About</h1>
                 <div>
-                    <a href='http://localhost:3000/'>
+                    <a href={process.env.REACT_APP_LOGIN}>
                         <button className='logout'>Logout</button>
                     </a>
                 </div>

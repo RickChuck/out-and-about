@@ -101,11 +101,42 @@ button.logout {
         background-color: black; 
     }
 }
-
-.comments {
-    border: solid 10px black;
-    margin: 1px;
+.commentBox{
+   
 }
+.inputBox[type=text]:focus{
+    border: solid 3px rgb(49, 49, 49);
+    width: 23vw;
+    
+}
+
+#comments2 {
+    border: solid 3px rgb(107, 145, 103);
+    margin: 5px;
+    position: static;
+    width: 20vw;
+    height: auto;
+    transform-style: preserve-3d;
+    font-size: 14px;
+}
+
+.deleteButton, .submitButton{
+    margin: 5px;
+    color: #4fbf7c;
+    background-color: whitesmoke;
+    border: solid 2px black;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.4s;
+    &:hover {
+        background-color: black; 
+    }
+
+}
+
+
 
 
 body{

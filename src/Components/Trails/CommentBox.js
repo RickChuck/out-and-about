@@ -20,7 +20,9 @@ class CommentBox extends Component {
 
 componentDidMount() {
     axios.get(`/api/commentList/${this.props.trailID}`)
-    .then(comments => this.setState({comments: comments.data}))
+    .then(comments => this.setState({comments: comments.data}));
+
+   
 }
 
 addComment(e) {
@@ -29,23 +31,16 @@ addComment(e) {
     let trailID= this.props.trailID
    axios.post('/api/addComment', {comment, trailID})
    .then(res => {
-       this.setState({comments: res.data})
+       this.setState({comments: res.data, commentInput: ''})
    })
 }
 
 deleteComment = (id) => {
-    axios.delete(`/api/removeComment${id}`)
-    .then(response => {
-        const commentIndex = this.state.comments.findIndex(x => x.id === id)
-        const comments = id(this.state.comments, {$splice: [[commentIndex, 1]]})
-        this.setState({comments: comments})
-    })
-    .catch(error => console.log(error))
-//     let deleteComment= this.state.comments
-//    axios.delete(`/api/removeComment`, {deleteComment})
-//    .then(res => {
-//        this.res.splice({comments: res.data})
-//    })
+    let trailID= this.props.trailID
+    axios.delete(`/api/removeComment/${id}/${trailID}`)
+    .then( res => {
+       this.setState({comments: res.data})
+   })
 }
 
 handleCommentInput(e) {
@@ -56,7 +51,7 @@ handleCommentInput(e) {
         return (
             <div className='commentBoxContainer'>
                 <h3 className='title'>How was your adventure?</h3>
-                <form onSubmit={this.addComment} >
+                <form className='inputBox' onSubmit={this.addComment} >
                     <div className='field'>
                         <div className='control'>
                             <textarea value={this.state.commentInput} onChange={this.handleCommentInput}  placeholder='Add a comment...'></textarea>
@@ -65,16 +60,18 @@ handleCommentInput(e) {
                     <div className='field'>
                         <div className='control'>
                             
-                            <button type='submit' className='button is-primary'>Submit</button>
-                            <button onClick={this.deleteComment} className='button is-delete'>Delete</button>
+                            <button type='submit' className='submitButton'>Submit</button>
                         </div>
                     </div>
                 </form>
-                <div id='comments'>
+                <div className='commentBox'>
                     {
                         this.state.comments.map(comment => (
                             <div key={comment.comment_id}>
+                            <ul id='comments2'>
                                 {comment.comment}
+                            <button onClick={() => this.deleteComment(comment.comment_id)} className='deleteButton'>Delete</button>
+                            </ul>
                             </div>
                         ))
                     }
