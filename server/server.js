@@ -12,16 +12,18 @@ const {
     SERVER_PORT,
     REACT_APP_DOMAIN,
     REACT_APP_CLIENT_ID,
-    REACT_APP_LOGIN,
     CLIENT_SECRET,
     CONNECTION_STRING,
-    SECRET
+    SECRET,
+    AUTH_PROTOCAL
 } = process.env;
 
 massive(CONNECTION_STRING).then(db => {
     console.log('db connected')
     app.set('db',db) 
 })
+
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(session({
     secret: SECRET,
@@ -48,7 +50,7 @@ app.get('/auth/callback', async (req, res) => {
         client_secret: CLIENT_SECRET,
         code: req.query.code,
         grant_type: 'authorization_code',
-        redirect_uri: `http://${req.headers.host}/auth/callback`
+        redirect_uri: `${AUTH_PROTOCAL}://${req.headers.host}/auth/callback`
       }
       let tokenRes = await axios.post(`https://${REACT_APP_DOMAIN}/oauth/token`, payload);
       let userRes = await axios.get(`https://${REACT_APP_DOMAIN}/userinfo?access_token=${tokenRes.data.access_token}`)
@@ -78,7 +80,7 @@ app.get('/api/user-data', authBypass, (req, res) => {
 
 app.get('/auth/logout', (req, res) => {
     req.session.destroy();
-    res.redirect(process.env.REACT_APP_LOGIN)
+    res.redirect('/#/')
 })
 app.get('/api/commentList/:trailid', (req, res) => {
     const{trailid} = req.params

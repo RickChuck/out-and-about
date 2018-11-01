@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import mountains from '../../photos/mountains.png';
 import home2 from '../../photos/home2.png';
 import star2 from '../../photos/star2.png';
 import axios from 'axios';
@@ -54,7 +53,7 @@ class Trails extends Component {
                 <div id="titleBanner">
             <h1>Out & About</h1>
                 <div>
-                    <a href={process.env.REACT_APP_LOGIN}>
+                    <a href={REACT_APP_LOGIN}>
                         <button className='logout'>Logout</button>
                     </a>
                 </div>
