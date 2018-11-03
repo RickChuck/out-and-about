@@ -78,6 +78,12 @@ app.get('/api/user-data', authBypass, (req, res) => {
     }
 })
 
+app.get('/api/getFavorites', (req, res) => {
+    const db = req.app.get('db')
+    db.get_favorites([req.session.user.user_id])
+    .then((trails) => res.status(200).send(trails))
+})
+
 app.get('/auth/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/#/')
@@ -89,16 +95,29 @@ app.get('/api/commentList/:trailid', (req, res) => {
     .then((comments) => res.status(200).send(comments))
 })
 
-app.post('/api/addComment',(req, res) => {
+app.post('/api/createFavorite', async (req, res) => {
+    const {id, name, city, directions, details, thumbnail} = req.body
+    const db = req.app.get('db')
+    await db.create_trail([id, name, city, directions, details, thumbnail])
+    console.log('params ----->', req.session.user.user_id, id)
+    db.add_favorite([req.session.user.user_id, id])
+    res.sendStatus(200);
+})
+
+app.post('/api/addComment', async (req, res) => {
     console.log(req.body)
     const{comment, trailID} = req.body
     const db = req.app.get('db')
     console.log(req.session)
     const user = req.session.user.user_id
-    db.add_comment([trailID, comment, user])
+    await db.add_comment([trailID, comment, user])
     .then((comments) => {
         res.status(200).send(comments)
     })
+})
+
+app.put('/api/updateComments', (req, res) => {
+    const db = req.app.get('db')
 })
 
 app.delete('/api/removeComment/:id/:trail_id',(req, res) => {

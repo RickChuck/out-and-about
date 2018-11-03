@@ -4,11 +4,12 @@ import star2 from '../../photos/star2.png';
 import axios from 'axios';
 import CommentBox from './CommentBox';
 import './Trails.scss';
+import {Link} from 'react-router-dom';
+import User from '../User/User';
 require('dotenv').config();
 
 const{
-    REACT_APP_API_KEY,
-    REACT_APP_LOGIN
+    REACT_APP_API_KEY
 }=process.env
 
 class Trails extends Component {
@@ -42,6 +43,11 @@ class Trails extends Component {
         // .then(comments => this.setState({comments: comments.data}));
     })
   }
+  
+  createFavorite = (trail) => {
+    axios.post('/api/createFavorite', trail)
+    
+}
 
   render() {
     //   console.log(this.state)
@@ -53,14 +59,12 @@ class Trails extends Component {
                 <div id="titleBanner">
             <h1>Out & About</h1>
                 <div>
-                    <a href={REACT_APP_LOGIN}>
-                        <button className='logout'>Logout</button>
-                    </a>
+                        <button className='logout'><Link to='/'>Logout</Link></button>
                 </div>
             <nav>
                 <ul id="nav-wrapper">
-                    <ul><a href="!#/trails" id="home"><img style={{width:75, height:75}} src={home2} alt='home'></img>Home</a></ul>
-                    <ul><a href="!#/user" id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</a></ul>
+                    <ul><Link to="/trails" component={Trails} id="home"><img style={{width:75, height:75}} src={home2} alt='home'></img>Home</Link></ul>
+                    <ul><Link to="/user" component={User} id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</Link></ul>
                 </ul>
             </nav>
             </div>
@@ -76,6 +80,9 @@ class Trails extends Component {
                         <div id='comments'>
                          <CommentBox trailID={el.id}/>
                         </div> 
+                        <div>
+                        <button onClick={ () => this.createFavorite(el)} className='favoriteButton'><img style={{width:35, height:35}} src={star2} alt='favorite'/></button>
+                        </div>
                     </div>
                 )
             })}

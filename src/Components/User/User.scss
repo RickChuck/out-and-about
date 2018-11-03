@@ -17,6 +17,7 @@ $font-stack: 'Oswald', sans-serif;
 
 #sub-title {
     @include centerer;
+    
 }
 #name, #city, #directions, #details, #comments {
     margin: 10px;

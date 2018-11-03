@@ -31,8 +31,16 @@ addComment(e) {
     let trailID= this.props.trailID
    axios.post('/api/addComment', {comment, trailID})
    .then(res => {
-       this.setState({comments: res.data, commentInput: ''})
+       this.setState({comments: res.data, commentInput:''})
    })
+}
+
+updateComment = (id) => {
+    let trail= this.props.trailID
+    axios.put(`/api/updateComment`)
+    .then( res => {
+        this.setState({comments: res.data})
+    })
 }
 
 deleteComment = (id) => {

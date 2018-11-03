@@ -17,7 +17,7 @@ export default class Login extends Component {
         return(
             <div id='App' >
             <body>
-                <img src={mtnBackground} class='mtnBackground' alt='mtnBackground'/>
+                <img src={mtnBackground} className='mtnBackground' alt='mtnBackground'/>
                 <div id='body'>
                     <h1 id='outAbout'>Out & About</h1>
                     <ul className='button'>

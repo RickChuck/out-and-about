@@ -8,7 +8,7 @@ $font-stack: 'Amatic SC', cursive;
   }
   
   
-  h1 {
+  #App {
     // display: flex;
     // flex-direction: column;
     // justify-content:center;
@@ -25,6 +25,10 @@ $font-stack: 'Amatic SC', cursive;
     @include centerer;
     position: fixed;
     font-size: 100px;
+    background: whitesmoke;
+    width: auto;
+    height: 40vh;
+    margin: 0px;
     @media (min-width: 425) {
       font-size: 20px;
     }

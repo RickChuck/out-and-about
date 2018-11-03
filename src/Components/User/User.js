@@ -5,6 +5,8 @@ import star2 from '../../photos/star2.png';
 import './User.scss'
 import CommentBox from '../Trails/CommentBox';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
+import Trails from '../Trails/Trails';
 
 const{REACT_APP_API_KEY}=process.env
 
@@ -19,18 +21,15 @@ class User extends Component {
     }
 
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition(data=> {
-          console.log(data)
-          axios.get(`https://trailapi-trailapi.p.mashape.com/trails/explore/?lat=${data.coords.latitude}&lon=${data.coords.longitude}`, {headers: {"X-Mashape-Key": REACT_APP_API_KEY}})
+          axios.get('/api/getFavorites')
           .then(res => {
               this.setState({results: res.data})
           })
-          .then(newData => this.setState({users: newData, store: newData}))
-          .catch(error => alert(error))
-        })
     }
+   
     
     render() {
+        console.log(this.state)
         return (
           <div className="User" >
             <div className="photo-banner">
@@ -42,14 +41,14 @@ class User extends Component {
             
             <nav>
                 <ul id="nav-wrapper">
-                    <ul><a href="!#/trails" id="home"><img style={{width:75, height:75}} src={home2} alt='home'></img>Home</a></ul>
-                    <ul><a href="!#/user" id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</a></ul>
+                    <ul><Link to="/trails" component={Trails} id="home"><img style={{width:75, height:75}} src={home2} alt='home'></img>Home</Link></ul>
+                    <ul><Link to="/user" component={User} id="user"><img style={{width:75, height:75}} src={star2} alt='user'></img>Favorites</Link></ul>
                 </ul>
             </nav>
             </div>
             
             <div id="display">
-            {this.state.results.data&&this.state.results.data.map(el => {
+            {this.state.results&&this.state.results.map(el => {
                 return(
                     <div id='card'>
                         <h2 id='name'>{el.name}</h2>
