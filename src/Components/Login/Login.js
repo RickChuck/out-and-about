@@ -16,7 +16,7 @@ export default class Login extends Component {
     render() {
         return(
             <div id='App' >
-            <body>
+            
                 <img src={mtnBackground} className='mtnBackground' alt='mtnBackground'/>
                 <div id='body'>
                     <h1 id='outAbout'>Out & About</h1>
@@ -24,7 +24,7 @@ export default class Login extends Component {
                         <button id='login' onClick={this.login}>Login</button>
                     </ul>
                 </div>
-            </body>
+            
             </div>
         )
     }

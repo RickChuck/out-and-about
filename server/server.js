@@ -118,6 +118,20 @@ app.post('/api/addComment', async (req, res) => {
 
 app.put('/api/updateComments', (req, res) => {
     const db = req.app.get('db')
+    db.delete_comment([+req.params.id, req.params.trail_id])
+    .then((updatedComments) => {
+        res.status(200).send(updatedComments)
+    })
+})
+
+app.put('/api/editComment', (req, res) => {
+    const {comment, commentID, trailID} = req.body
+    console.log(commentID)
+    const db = req.app.get('db')
+    db.update_comment([comment, commentID, trailID])
+    .then(comments => {
+        res.status(200).send(comments)
+    })
 })
 
 app.delete('/api/removeComment/:id/:trail_id',(req, res) => {

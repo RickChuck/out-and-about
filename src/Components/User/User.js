@@ -8,7 +8,6 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import Trails from '../Trails/Trails';
 
-const{REACT_APP_API_KEY}=process.env
 
 class User extends Component {
     constructor(props) {

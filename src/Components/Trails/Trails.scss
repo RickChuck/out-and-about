@@ -2,7 +2,7 @@
 $font-stack: 'Amatic SC', cursive;
 #titleBanner {
     font-family: $font-stack;
-    font-size: 50px;
+    font-size: 60px;
     text-align: center;
     width: 100%;
     background-color: whitesmoke;
@@ -86,7 +86,7 @@ nav {
 
 
 #thumbnail {
-    width: 200px;
+    width: 240px;
     height: auto;
     float: right;
     margin: 5px;
@@ -100,7 +100,7 @@ button.logout {
     background-color: whitesmoke;
     color: #4fbf7c;
     border: solid 2px black;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     border-radius: 8px;
     cursor: pointer;
@@ -114,31 +114,49 @@ a{
     text-decoration: none;
     color: inherit;
 }
-.commentBox{
+// .commentBox{
    
-}
+// }
 .inputBox[type=text]:focus{
     border: solid 3px rgb(49, 49, 49);
     width: 23vw;
     
 }
 
-#comments2 {
-    border: solid 3px rgb(107, 145, 103);
-    margin: 5px;
-    position: static;
-    width: 20vw;
-    height: auto;
-    transform-style: preserve-3d;
-    font-size: 14px;
+textarea {
+    resize: none;
+    width: 15vw;
+    height: 5vh;
+    border: 3px solid gray;
+    border-radius: 8px;
+    font-size: 18px;
+}
+input {
+    resize: none;
+    width: 10vw;
+    height: 3vh;
+    margin: 3px;
+    border-radius: 8px;
 }
 
-.deleteButton, .submitButton{
+.commentList {
+    border: solid 3px rgb(107, 145, 103);
+    // border-bottom: solid 3px rgb(107, 145, 103);
+    border-radius: 8px;
+    margin: 0px;
+    position: static;
+    width: 35vw;
+    height: auto;
+    transform-style: preserve-3d;
+    font-size: 20px;
+}
+
+.deleteButton, .submitButton, .updateButton{
     margin: 5px;
     color: #4fbf7c;
     background-color: whitesmoke;
     border: solid 2px black;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
@@ -179,4 +197,16 @@ body{
 
 #name, #city, #directions, #details, #comments {
     margin: 10px;
+}
+#name{
+    font-size: 30px;
+}
+#city {
+    font-size: 24px;
+}
+#directions {
+    font-size: 18px;
+}
+#details {
+    font-size: 20px;
 }
